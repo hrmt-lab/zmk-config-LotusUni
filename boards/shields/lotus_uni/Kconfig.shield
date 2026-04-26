@@ -1,0 +1,5 @@
+config SHIELD_LOTUS_UNI_DONGLE
+    def_bool $(shields_list_contains,lotus_uni_dongle)
+
+config SHIELD_LOTUS_UNI_PERIPHERALS
+    def_bool $(shields_list_contains,lotus_uni_peripherals)

@@ -1,0 +1,13 @@
+file_format: "1"
+id: lotus_uni
+name: lotus_uni
+type: shield
+url: https://github.com/hrmt-lab/zmk-config-LotusUni
+requires: [seeeduino_xiao_ble]
+
+features:
+  - keys
+  - studio
+siblings:
+  - lotus_uni_dongle
+  - lotus_uni_peripherals

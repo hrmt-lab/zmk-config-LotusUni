@@ -1,0 +1,34 @@
+#include "lotus_uni.dtsi"
+
+&kscan0 {
+    compatible = "zmk,kscan-gpio-matrix";
+    label = "kscan0";
+    wakeup-source;
+    diode-direction = "col2row";
+
+    col-gpios
+        = <&xiao_d 10 GPIO_ACTIVE_HIGH>     /* Col1  P1.15 (D10) */
+        , <&gpio1   7 GPIO_ACTIVE_HIGH>     /* Col2  P1.07      */
+        , <&xiao_d  9 GPIO_ACTIVE_HIGH>     /* Col3  P1.14 (D9) */
+        , <&gpio1   5 GPIO_ACTIVE_HIGH>     /* Col4  P1.05      */
+        , <&xiao_d  8 GPIO_ACTIVE_HIGH>     /* Col5  P1.13 (D8) */
+        , <&gpio1   3 GPIO_ACTIVE_HIGH>     /* Col6  P1.03      */
+        , <&gpio1   1 GPIO_ACTIVE_HIGH>     /* Col7  P1.01      */
+        , <&xiao_d  3 GPIO_ACTIVE_HIGH>     /* Col8  P0.29 (D3) */
+        , <&gpio0   9 GPIO_ACTIVE_HIGH>     /* Col9  P0.09      */
+        , <&xiao_d  4 GPIO_ACTIVE_HIGH>     /* Col10 P0.04 (D4) */
+        , <&gpio0  10 GPIO_ACTIVE_HIGH>     /* Col11 P0.10      */
+        , <&xiao_d  5 GPIO_ACTIVE_HIGH>     /* Col12 P0.05 (D5) */
+        ;
+
+    row-gpios
+        = <&gpio0  15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* Row1 P0.15      */
+        , <&xiao_d  1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* Row2 P0.03 (D1) */
+        , <&gpio0  19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* Row3 P0.19      */
+        , <&xiao_d  2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* Row4 P0.28 (D2) */
+        ;
+};
+
+&uicr {
+        nfct-pins-as-gpios;
+};

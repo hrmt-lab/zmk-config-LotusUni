@@ -1,14 +1,23 @@
 manifest:
-  defaults:
-    revision: v0.3
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    # Additional modules containing boards/shields/custom code can be listed here as well
-    # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
+#    - name: sekigon-gonnoc
+#      url-base: https://github.com/sekigon-gonnoc
+    - name: carrefinho
+      url-base: https://github.com/carrefinho
+    - name: hrmt-lab
+      url-base: https://github.com/hrmt-lab
   projects:
     - name: zmk
       remote: zmkfirmware
+      revision: main
       import: app/west.yml
+#    - name: zmk-feature-non-lipo-battery-management
+#      remote: sekigon-gonnoc
+#      revision: main
+    - name: prospector-zmk-module
+      remote: carrefinho
+      revision: feat/new-status-screens
   self:
     path: config
