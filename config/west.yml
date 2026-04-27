@@ -2,10 +2,10 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-#    - name: sekigon-gonnoc
-#      url-base: https://github.com/sekigon-gonnoc
-    - name: carrefinho
-      url-base: https://github.com/carrefinho
+    # - name: sekigon-gonnoc
+    #   url-base: https://github.com/sekigon-gonnoc
+    # - name: carrefinho
+    #   url-base: https://github.com/carrefinho
     - name: hrmt-lab
       url-base: https://github.com/hrmt-lab
   projects:
@@ -17,7 +17,7 @@ manifest:
 #      remote: sekigon-gonnoc
 #      revision: main
     - name: prospector-zmk-module
-      remote: carrefinho
+      remote: hrmt-lab
       revision: feat/new-status-screens
   self:
     path: config
