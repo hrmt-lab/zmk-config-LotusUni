@@ -28,3 +28,4 @@ include:
     artifact-name: lotus_uni_peripheral
   - board: xiao_ble//zmk
     shield: settings_reset
+    artifact-name: lotus_uni_settings_reset
