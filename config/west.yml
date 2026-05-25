@@ -16,8 +16,8 @@ manifest:
 #    - name: zmk-feature-non-lipo-battery-management
 #      remote: sekigon-gonnoc
 #      revision: main
-    - name: prospector-zmk-module
+    - name: prospector-zmk-module-ring
       remote: hrmt-lab
-      revision: feat/new-status-screens
+      revision: feat/ring-light
   self:
     path: config
