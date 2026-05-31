@@ -18,6 +18,12 @@ manifest:
 #      revision: main
     - name: prospector-zmk-module-ring
       remote: hrmt-lab
-      revision: feat/ring-light
+      revision: main
+    - name: zmk-raw-hid
+      remote: hrmt-lab
+      revision: custom/raw-hid-custom
+    - name: zmk-rawhid-app
+      remote: hrmt-lab
+      revision: main
   self:
     path: config

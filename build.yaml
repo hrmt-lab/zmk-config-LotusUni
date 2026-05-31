@@ -20,7 +20,7 @@
 ---
 include:
   - board: xiao_ble//zmk
-    shield: lotus_uni_dongle prospector_adapter
+    shield: lotus_uni_dongle prospector_adapter raw_hid_adapter
     snippet: studio-rpc-usb-uart
     artifact-name: lotus_uni_dongle
   - board: xiao_ble//zmk
