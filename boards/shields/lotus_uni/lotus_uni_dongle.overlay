@@ -12,4 +12,8 @@
         rows = <0>;
         events = <0>;
     };
+
+    combos {
+        status = "disabled";
+    };
 };
