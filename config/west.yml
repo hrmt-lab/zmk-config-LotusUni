@@ -21,9 +21,9 @@ manifest:
       revision: main
     - name: zmk-raw-hid
       remote: hrmt-lab
-      revision: feat/keymap-advanced-behaviors
+      revision: custom/raw-hid-custom
     - name: zmk-rawhid-app
       remote: hrmt-lab
-      revision: feat/keymap-advanced-behaviors
+      revision: main
   self:
     path: config
