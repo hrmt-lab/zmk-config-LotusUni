@@ -1,0 +1,21 @@
+/*
+ * LotusUni standalone BLE build (no dongle).
+ *
+ * The keyboard PCB is the Host Link endpoint itself: Keylink Studio reaches it
+ * over BLE HOG (or over USB when the cable is plugged in).
+ */
+
+#include "lotus_uni.dtsi"
+#include "lotus_uni_kscan.dtsi"
+
+/ {
+    /*
+     * The Keylink runtime Combo engine replaces ZMK's devicetree Combo
+     * listener. The node must stay present (its children are the read-only
+     * defaults Keylink Studio shows) but disabled, so only one engine
+     * processes key events.
+     */
+    combos {
+        status = "disabled";
+    };
+};

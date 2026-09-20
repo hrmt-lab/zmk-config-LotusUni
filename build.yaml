@@ -1,22 +1,17 @@
-# This file generates the GitHub Actions matrix.
-# For simple board + shield combinations, add them to the top level board and
-# shield arrays, for more control, add individual board + shield combinations
-# to the `include` property. You can also use the `cmake-args` property to
-# pass flags to the build command, `snippet` to add a Zephyr snippet, and
-# `artifact-name` to assign a name to distinguish build outputs from each other:
+# This file generates the GitHub Actions matrix, and is what `just build <expr>`
+# filters on locally.
 #
-# board: [ "nice_nano_v2" ]
-# shield: [ "corne_left", "corne_right" ]
-# include:
-#   - board: bdn9_rev2
-#   - board: nice_nano_v2
-#     shield: reviung41
-#   - board: nice_nano_v2
-#     shield: corne_left
-#     snippet: studio-rpc-usb-uart
-#     cmake-args: -DCONFIG_ZMK_STUDIO=y
-#     artifact-name: corne_left_with_studio
+# LotusUni is a dongle-based keyboard:
 #
+#   lotus_uni_dongle.uf2      -> XIAO BLE dongle (split central + Prospector RING)
+#   lotus_uni_peripheral.uf2  -> keyboard PCB (split peripheral)
+#
+# Keylink Studio talks to the dongle over USB Raw HID.
+#
+# A dongle-less standalone BLE build was investigated and abandoned: Host Link
+# needs 64 byte packets, and this keyboard's BLE link has too little margin to
+# carry them reliably on battery. See docs/ble-hostlink-findings.md for the
+# investigation. The shield is kept but is deliberately not built here.
 ---
 include:
   - board: xiao_ble//zmk
@@ -26,6 +21,8 @@ include:
   - board: xiao_ble//zmk
     shield: lotus_uni_peripherals
     artifact-name: lotus_uni_peripheral
+
+  # ── 設定リセット ──
   - board: xiao_ble//zmk
     shield: settings_reset
     artifact-name: lotus_uni_settings_reset

@@ -1,3 +1,11 @@
+# LotusUni ships three firmware roles:
+#   lotus_uni_ble         standalone BLE keyboard, talks to Keylink Studio itself
+#   lotus_uni_dongle      split central on a XIAO BLE dongle (USB + Prospector RING)
+#   lotus_uni_peripherals the keyboard PCB when a dongle is used
+
+config SHIELD_LOTUS_UNI_BLE
+    def_bool $(shields_list_contains,lotus_uni_ble)
+
 config SHIELD_LOTUS_UNI_DONGLE
     def_bool $(shields_list_contains,lotus_uni_dongle)
 

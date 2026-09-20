@@ -1,9 +1,16 @@
+/*
+ * LotusUni dongle (XIAO BLE + Prospector RING).
+ *
+ * Split central and Host Link endpoint. It has no key matrix of its own, so
+ * kscan is mocked out.
+ */
+
 #include "lotus_uni.dtsi"
 
 / {
     chosen {
         zmk,kscan = &mock_kscan;
-        wakeup-source;        
+        wakeup-source;
     };
 
     mock_kscan: mock_kscan_0 {
@@ -13,6 +20,7 @@
         events = <0>;
     };
 
+    /* See lotus_uni_ble.overlay: Keylink runtime Combo engine owns combos. */
     combos {
         status = "disabled";
     };

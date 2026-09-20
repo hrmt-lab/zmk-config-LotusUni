@@ -1,4 +1,22 @@
+if SHIELD_LOTUS_UNI_BLE
+
+config ZMK_KEYBOARD_NAME
+    default "LotusUni"
+
+# Standalone: the keyboard PCB is the only device, so no split roles at all.
+# This is what lets CONFIG_RAW_HID (depends on !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL)
+# be enabled directly on the keyboard, and Host Link runs over BLE HOG.
+config ZMK_SPLIT
+    default n
+
+config NFCT_PINS_AS_GPIOS
+    default y
+
+endif # SHIELD_LOTUS_UNI_BLE
+
+
 if SHIELD_LOTUS_UNI_DONGLE
+
 config ZMK_KEYBOARD_NAME
     default "LotusUni"
 
@@ -12,9 +30,17 @@ endif # SHIELD_LOTUS_UNI_DONGLE
 
 
 if SHIELD_LOTUS_UNI_PERIPHERALS
-config NFCT_PINS_AS_GPIOS
-    default y
+
+config ZMK_KEYBOARD_NAME
+    default "LotusUni"
 
 config ZMK_SPLIT
     default y
+
+# ZMK_SPLIT_ROLE_CENTRAL stays at its default of n: this build only reports
+# key presses to lotus_uni_dongle.
+
+config NFCT_PINS_AS_GPIOS
+    default y
+
 endif # SHIELD_LOTUS_UNI_PERIPHERALS
