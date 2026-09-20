@@ -72,8 +72,11 @@ firmware 設定で埋められる範囲は出し切っている。
 
 ## 調査中に見つかった zmk-raw-hid の実装上の不備（今回の原因ではない）
 
-いずれも原因ではなかったが、切り分け中に判明した実装差。採用する場合は fork
-(`hrmt-lab/zmk-raw-hid`, `custom/raw-hid-custom`) への push が必要。
+いずれも今回の症状の原因ではなかったが、切り分け中に判明した実装差。
+**3件とも修正済み**（`hrmt-lab/zmk-raw-hid` の `custom/raw-hid-custom` に push 済み）。
+
+- `7ed7fab fix: answer GATT reads on the BLE Raw HID report characteristics`
+- `8ce8f99 fix: stop the USB Raw HID send path from spinning without an endpoint`
 
 ### 1. `src/hog.c` — Report characteristic の read コールバックが NULL
 
@@ -83,7 +86,7 @@ NULL なら `BT_ATT_ERR_READ_NOT_PERMITTED` を返す（`gatt.c`）。
 ZMK 本体の `zmk/app/src/hog.c` は全 report characteristic に実 read コールバック
 (`read_hids_input_report` 等) を持っており、そちらに揃えるのが正しい。
 
-対処: 直近の送受信内容をキャッシュして返す read コールバックを 2 本追加する。
+対処（実施済み）: 直近の送受信内容をキャッシュして返す read コールバックを 2 本追加した。
 属性の並びは変わらないので `notify_params.attr = &raw_hog_svc.attrs[5]` はそのまま。
 
 ### 2. `src/usb_hid.c` — `HID_1` 不在時の NULL 参照
@@ -94,7 +97,7 @@ ZMK 本体の `zmk/app/src/hog.c` は全 report characteristic に実 read コ�
 `CONFIG_RAW_HID=y` だけ有効にしたビルド（`USB_HID_DEVICE_COUNT=1`）で
 USB HID が ready になると NULL 参照になる。
 
-対処: work handler の先頭で `raw_hid_dev == NULL` ならキューを捨てて return する。
+対処（実施済み）: work handler の先頭で `raw_hid_dev == NULL` ならキューを捨てて return する。
 
 ### 3. `src/usb_hid.c` — USB 未接続時に破棄パスがない
 
@@ -102,3 +105,7 @@ USB HID が ready になると NULL 参照になる。
 再スケジュールし続ける（`report_pending` が下りない）。BLE 運用で USB 未接続だと
 system workqueue 上に 100Hz の work が残り続ける。実害は確認できなかったが、
 一定回数で諦めて捨てる方が素直。
+
+対処（実施済み）: 1 秒でリトライを打ち切って破棄する。加えて `send_report()` の入口で
+`zmk_usb_is_hid_ready()` を見て、送り先が無いときはキューに積まない。
+この判定は ZMK 本体が `endpoints.c` の `is_usb_ready()` で使っているものと同じ。
